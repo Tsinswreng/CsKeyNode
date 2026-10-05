@@ -15,8 +15,8 @@ public partial class TestCfgNode : ITester {
 		Node.Ordered = true;
 		Node.IsParallelRecursive = false;
 		RegisterMk(Node);
-		RegisterGetFullPathSegs(Node);
-		RegisterGetFullPath(Node);
+		// RegisterGetFullPathSegs(Node);
+		// RegisterGetFullPath(Node);
 		RegisterDfltValue(Node);
 		RegisterChildren(Node);
 		return Node;

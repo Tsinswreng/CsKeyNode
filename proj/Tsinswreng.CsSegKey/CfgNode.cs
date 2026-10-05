@@ -2,36 +2,74 @@ using Tsinswreng.CsCore;
 
 namespace Tsinswreng.CsSegKey;
 
-public partial class CfgNode<T>:ICfgNode<T>{
-	[Doc(@$"Path Separator.
-	default is `/`, NOT `.`
-	Examples([`Foo/Bar/Baz`])
-	")]
-	public const str PathSep = "/";
-	public CfgNode(){}
+public partial class SegKey: ISegKey{
 	public IList<str> RelaPathSegs{get;set;} = [];
+	public str PathSep{get;set;} = "/";
 	public str? _FullPathCache{get;set;}
-	public obj? DfltValueObj{get;set;}
-	public T? DfltValue{
-		get=>DfltValueObj is null?default:(T?)DfltValueObj;
-		set=>DfltValueObj = value;
-	}
-	public ICfgNode? Parent{get;set;}
-	public IList<ICfgNode>? Children{get;set;}
+	public obj? DataObj{get;set;}
 
-	public static ICfgNode<object?> Mk(
-		ICfgNode? Parent
-		,IList<str> Path
-		,obj? DfltValue = null
-	){
-		return new CfgNode<object?>{RelaPathSegs=Path, DfltValue=DfltValue, Parent=Parent};
+	public ISegKey? Parent{get;set;}
+	public IList<ISegKey>? Children{get;set;}
+	public Func<str?>? FnToString{get;set;}
+	
+	public SegKey(){
+		FnToString = ()=>{
+			if(_FullPathCache is not null){
+				return _FullPathCache;
+			}
+			_FullPathCache = str.Join(PathSep, RelaPathSegs);
+			return _FullPathCache;
+		};
 	}
 
-	public static ICfgNode<T2> Mk<T2>(
-		ICfgNode? Parent
+	public static implicit operator string?(SegKey z){
+		return z.ToString();
+	}
+}
+
+public partial class SegKey<T>:SegKey,ISegKey<T>{
+	public SegKey(){}
+	
+	public T? Data{
+		get=>DataObj is null?default:(T?)DataObj;
+		set=>DataObj = value;
+	}
+
+	public static implicit operator string?(SegKey<T> z){
+		return z.ToString();
+	}
+	public override string? ToString() {
+		if(FnToString is not null){
+			return FnToString();
+		}
+		return base.ToString();
+	}
+
+	
+	[Doc("""
+	#Eg[
+	```cs
+	
+	```
+	]
+	""")]
+	public static SegKey<obj?> Mk(
+		ISegKey? Parent
 		,IList<str> Path
-		,T2 DfltValue = default!
+		,obj? Data = null
 	){
-		return new CfgNode<T2>{RelaPathSegs=Path, DfltValue=DfltValue, Parent=Parent};
+		return new SegKey<obj?>{
+			RelaPathSegs=Path, Data=Data, Parent=Parent
+		};
+	}
+	
+	public static SegKey<T2> Mk<T2>(
+		ISegKey? Parent
+		,IList<str> Path
+		,T2 Data = default!
+	){
+		return new SegKey<T2>{
+			RelaPathSegs=Path, Data=Data, Parent=Parent
+		};
 	}
 }

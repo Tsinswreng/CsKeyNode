@@ -2,20 +2,26 @@ using Tsinswreng.CsCore;
 
 namespace Tsinswreng.CsSegKey;
 
-[Doc("Config Node")]
-public partial interface ICfgNode{
+
+public partial interface ISegKey{
+	
 	[Doc(@$"Relative Path Segments.
 	without path of `{nameof(Parent)}`
 	")]
 	public IList<str> RelaPathSegs{get;set;}
+	
+	[Doc(@$"Path Separator.
+	default is `/`, NOT `.`
+	Eg[`Foo/Bar/Baz`]
+	")]
+	public str PathSep{get;set;}
 	public str? _FullPathCache{get;set;}
-	[Doc(@$"Default Value")]
-	public obj? DfltValueObj{get;set;}
-	public ICfgNode? Parent{get;set;}
-	public IList<ICfgNode>? Children{get;set;}
-
+	public ISegKey? Parent{get;set;}
+	public IList<ISegKey>? Children{get;set;}
+	public obj? DataObj{get;set;}
+	public Func<str?>? FnToString{get;set;}
 }
 
-public partial interface ICfgNode<T>:ICfgNode{
-	public T? DfltValue{get;set;}
+public partial interface ISegKey<T>:ISegKey{
+	
 }
