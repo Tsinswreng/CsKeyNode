@@ -1,7 +1,7 @@
 using Tsinswreng.CsSh;
 using static Tsinswreng.CsSh.ShGlobal;
 
-namespace Tsinswreng.CsSegKey.Scripts;
+namespace Tsinswreng.CsKeyNode.Scripts;
 
 /// Test 命令的流程實現。
 internal static partial class Test{

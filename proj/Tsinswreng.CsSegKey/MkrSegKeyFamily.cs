@@ -1,4 +1,4 @@
-namespace Tsinswreng.CsSegKey;
+namespace Tsinswreng.CsKeyNode;
 
 [Doc($$"""
 一個鍵族的基類。
@@ -21,7 +21,7 @@ public class KeysClientCfg : MkrSegKeyFamily<KeysClientCfg>{
 - `Mk` 讀的是 {{nameof(I)}}(本族的單例)身上的 {{nameof(Mkr)}},
   所以每個族各有自己的分隔符, 互不影響。
 """)]
-public abstract class MkrSegKeyFamily<TSelf> where TSelf : MkrSegKeyFamily<TSelf>, new(){
+public abstract class MkrKeyNodeFamily<TSelf> where TSelf : MkrKeyNodeFamily<TSelf>, new(){
 
 	/// 本族的單例。
 	/// 每個族(即每個封閉的 TSelf)各有一份, 記着本族的分隔符。
@@ -31,15 +31,15 @@ public abstract class MkrSegKeyFamily<TSelf> where TSelf : MkrSegKeyFamily<TSelf
 	protected virtual str FamilyPathSep => "/";
 
 	/// 本族的 Mkr。分隔符在單例建立時寫入, 之後各族互不影響。
-	public MkrSegKey Mkr{get;}
+	public MkrKeyNode Mkr{get;}
 
-	protected MkrSegKeyFamily(){
-		Mkr = new MkrSegKey{ PathSep = FamilyPathSep };
+	protected MkrKeyNodeFamily(){
+		Mkr = new MkrKeyNode{ PathSep = FamilyPathSep };
 	}
 
 	/// 造一個不帶型別信息的節點, 數據型別為 obj?。
-	public static SegKey<obj?> Mk(
-		ISegKey? Parent
+	public static KeyNode<obj?> Mk(
+		IKeyNode? Parent
 		,IList<str> Path
 		,obj? Data = null
 	){
@@ -47,8 +47,8 @@ public abstract class MkrSegKeyFamily<TSelf> where TSelf : MkrSegKeyFamily<TSelf
 	}
 
 	/// 造一個帶型別信息的節點, 數據型別由調用處推斷。
-	public static SegKey<T2> Mk<T2>(
-		ISegKey? Parent
+	public static KeyNode<T2> Mk<T2>(
+		IKeyNode? Parent
 		,IList<str> Path
 		,T2 Data = default!
 	){

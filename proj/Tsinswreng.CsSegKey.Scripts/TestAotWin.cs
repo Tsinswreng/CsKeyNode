@@ -1,4 +1,4 @@
-namespace Tsinswreng.CsSegKey.Scripts;
+namespace Tsinswreng.CsKeyNode.Scripts;
 
 /// 以 win-x64 NativeAOT 發布 Tsinswreng.CsSegKey.Test 並運行發布物，驗證 AOT 剪裁後測試仍全部通過。
 internal static partial class TestAotWin{

@@ -1,7 +1,7 @@
 using Tsinswreng.CsTreeTest;
-using Tsinswreng.CsSegKey.Test.Domains.CfgNode;
-using Tsinswreng.CsSegKey.Test.Domains.SegKey;
-namespace Tsinswreng.CsSegKey.Test;
+using Tsinswreng.CsKeyNode.Test.Domains.CfgNode;
+using Tsinswreng.CsKeyNode.Test.Domains.SegKey;
+namespace Tsinswreng.CsKeyNode.Test;
 
 public class CsSegKeyTestMgr:DiEtTestMgr{
 	public static CsSegKeyTestMgr Inst = new();

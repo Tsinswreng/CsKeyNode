@@ -1,20 +1,9 @@
-namespace Tsinswreng.CsSegKey;
+namespace Tsinswreng.CsKeyNode;
 
 
-public delegate SegKey<obj?> FnMkSegKey(
-	ISegKey? Parent
-	,IList<str> Path
-	,obj? Data = null
-);
-public delegate SegKey<T> FnMkSegKey<T>(
-	ISegKey? Parent
-	,IList<str> Path
-	,T Data = default!
-);
-
-public class MkrSegKey{
+public class MkrKeyNode{
 	public str PathSep{get;set;} = "/";
-	public MkrSegKey(){}
+	public MkrKeyNode(){}
 	
 	[Doc("""
 	#Eg[
@@ -23,12 +12,12 @@ public class MkrSegKey{
 	```
 	]
 	""")]
-	public SegKey<obj?> Mk(
-		ISegKey? Parent
+	public KeyNode<obj?> Mk(
+		IKeyNode? Parent
 		,IList<str> Path
 		,obj? Data = null
 	){
-		return new SegKey<obj?>{
+		return new KeyNode<obj?>{
 			PathSep = PathSep,
 			RelaPathSegs = Path,
 			Data = Data,
@@ -36,12 +25,12 @@ public class MkrSegKey{
 		};
 	}
 	
-	public SegKey<T2> Mk<T2>(
-		ISegKey? Parent
+	public KeyNode<T2> Mk<T2>(
+		IKeyNode? Parent
 		,IList<str> Path
 		,T2 Data = default!
 	){
-		return new SegKey<T2>{
+		return new KeyNode<T2>{
 			PathSep = PathSep,
 			RelaPathSegs = Path,
 			Data = Data,

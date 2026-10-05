@@ -1,4 +1,4 @@
-namespace Tsinswreng.CsSegKey.Scripts;
+namespace Tsinswreng.CsKeyNode.Scripts;
 
 /// 以 dotnet run 直接運行 Tsinswreng.CsSegKey.Test 測試專案。
 internal static partial class Test{

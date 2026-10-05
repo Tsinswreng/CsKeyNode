@@ -2,7 +2,7 @@
 // 主文件以下劃線開頭：只負責組裝各分片的測試用例，不在主文件裏寫測試。
 using Tsinswreng.CsTreeTest;
 
-namespace Tsinswreng.CsSegKey.Test.Domains.CfgNode;
+namespace Tsinswreng.CsKeyNode.Test.Domains.CfgNode;
 
 public partial class TestCfgNode : ITester {
 	public TestCfgNode() {

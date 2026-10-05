@@ -1,4 +1,4 @@
-namespace Tsinswreng.CsSegKey.Scripts;
+namespace Tsinswreng.CsKeyNode.Scripts;
 
 using System.Runtime.CompilerServices;
 using Tsinswreng.CsSh;

@@ -1,18 +1,18 @@
 using Tsinswreng.CsCore;
 
-namespace Tsinswreng.CsSegKey;
+namespace Tsinswreng.CsKeyNode;
 
-public partial class SegKey: ISegKey{
+public partial class KeyNode: IKeyNode{
 	public IList<str> RelaPathSegs{get;init;} = [];
 	public str PathSep{get;init;} = "/";
 	public str? _FullPathCache{get;set;}
 	public obj? DataObj{get;set;}
 
-	public ISegKey? Parent{get;init;}
-	public IList<ISegKey>? Children{get;set;}
+	public IKeyNode? Parent{get;init;}
+	public IList<IKeyNode>? Children{get;set;}
 	public Func<str?>? FnToString{get;set;}
 	
-	public SegKey(){
+	public KeyNode(){
 		FnToString = ()=>{
 			if(_FullPathCache is not null){
 				return _FullPathCache;
@@ -23,7 +23,7 @@ public partial class SegKey: ISegKey{
 		};
 	}
 
-	public static implicit operator string?(SegKey z){
+	public static implicit operator string?(KeyNode z){
 		return z.ToString();
 	}
 
@@ -36,15 +36,15 @@ public partial class SegKey: ISegKey{
 	}
 }
 
-public partial class SegKey<T>:SegKey,ISegKey<T>{
-	public SegKey(){}
+public partial class KeyNode<T>:KeyNode,IKeyNode<T>{
+	public KeyNode(){}
 	
 	public T? Data{
 		get=>DataObj is null?default:(T?)DataObj;
 		set=>DataObj = value;
 	}
 
-	public static implicit operator string?(SegKey<T> z){
+	public static implicit operator string?(KeyNode<T> z){
 		return z.ToString();
 	}
 	public override string? ToString() {
@@ -62,22 +62,22 @@ public partial class SegKey<T>:SegKey,ISegKey<T>{
 	```
 	]
 	""")]
-	public static SegKey<obj?> Mk(
-		ISegKey? Parent
+	public static KeyNode<obj?> Mk(
+		IKeyNode? Parent
 		,IList<str> Path
 		,obj? Data = null
 	){
-		return new SegKey<obj?>{
+		return new KeyNode<obj?>{
 			RelaPathSegs=Path, Data=Data, Parent=Parent
 		};
 	}
 	
-	public static SegKey<T2> Mk<T2>(
-		ISegKey? Parent
+	public static KeyNode<T2> Mk<T2>(
+		IKeyNode? Parent
 		,IList<str> Path
 		,T2 Data = default!
 	){
-		return new SegKey<T2>{
+		return new KeyNode<T2>{
 			RelaPathSegs=Path, Data=Data, Parent=Parent
 		};
 	}

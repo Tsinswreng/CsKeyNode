@@ -1,7 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Tsinswreng.CsTreeTest;
 
-namespace Tsinswreng.CsSegKey.Test;
+namespace Tsinswreng.CsKeyNode.Test;
 
 internal class Program{
 	public static IServiceCollection SvcColct = new ServiceCollection();

@@ -1,10 +1,10 @@
-namespace Tsinswreng.CsSegKey;
+namespace Tsinswreng.CsKeyNode;
 
 [Doc(@$"分段鍵的路徑推導擴展。
-兩個函數都只是由 {nameof(ISegKey.RelaPathSegs)}、{nameof(ISegKey.Parent)}、{nameof(ISegKey.PathSep)} 推導出來的簡便寫法,
+兩個函數都只是由 {nameof(IKeyNode.RelaPathSegs)}、{nameof(IKeyNode.Parent)}、{nameof(IKeyNode.PathSep)} 推導出來的簡便寫法,
 沒有多態與重寫需求, 故放擴展而非成員。
 ")]
-public static class ISegKeyExtn{
+public static class IKeyNodeExtn{
 
 	[Doc($"""
 	沿父鏈上溯, 收集全路徑的路徑段, 順序為父先子後。
@@ -18,11 +18,11 @@ public static class ISegKeyExtn{
 	]
 	""")]
 	public static IList<str> GetFullPathSegs(
-		this ISegKey z
+		this IKeyNode z
 	){
 		// step 1: 自當前節點沿 Parent 逐層上溯, 收集每層自己的相對路徑段
 		var List2D = new List<IList<str>>();
-		ISegKey? Cur = z;
+		IKeyNode? Cur = z;
 		while(Cur is not null){
 			List2D.Add(Cur.RelaPathSegs);
 			Cur = Cur.Parent;
@@ -39,7 +39,7 @@ public static class ISegKeyExtn{
 
 	[Doc($"""
 	把全路徑的段以 {nameof(Sep)} 連接成一條字符串鍵。
-	{nameof(Sep)} 省略時取當前節點的 {nameof(ISegKey.PathSep)}。
+	{nameof(Sep)} 省略時取當前節點的 {nameof(IKeyNode.PathSep)}。
 	#Eg[
 	```cs
 	var Mkr = new MkrSegKey();
@@ -50,7 +50,7 @@ public static class ISegKeyExtn{
 	]
 	""")]
 	public static str GetFullPath(
-		this ISegKey z
+		this IKeyNode z
 		,str? Sep = null
 	){
 		return str.Join(Sep ?? z.PathSep, z.GetFullPathSegs());
