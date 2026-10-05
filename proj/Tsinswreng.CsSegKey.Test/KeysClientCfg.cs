@@ -1,29 +1,17 @@
 namespace Tsinswreng.CsSegKey.Test;
 using System.Collections;
-using static Tsinswreng.CsSegKey.SegKey<obj?>;
 //TODO 異常處理 勿緣用戶配置ʹ謬而致整程序崩
 
-public class KeysClientCfg{
+/// 客戶端配置鍵族。
+/// 繼承 MkrSegKeyFamily 之後, 裸的 Mk 由基類提供, 本類不必再寫轉發方法。
+public class KeysClientCfg : MkrSegKeyFamily<KeysClientCfg>{
+	/// 本族的分隔符。整族只寫這一處。
+	protected override str FamilyPathSep => ".";
+
 	// public static SegKey Mk(){
 		
 	// }
-	public static MkrSegKey Mkr = new(){PathSep="."};
 	//public static FnMkSegKey Mk = Mkr.Mk;
-	public static SegKey<obj?> Mk(
-		ISegKey? Parent
-		,IList<str> Path
-		,obj? Data = null
-	){
-		return Mkr.MkNonLeaf(Parent, Path, Data);
-	}
-	
-	public static SegKey<T2> Mk<T2>(
-		ISegKey? Parent
-		,IList<str> Path
-		,T2 Data = default!
-	){
-		return Mkr.MkLeaf(Parent, Path, Data);
-	}
 	
 	public static SegKey<str> Lang = Mk(null, [nameof(Lang)], "en");
 
@@ -100,4 +88,3 @@ public class KeysClientCfg{
 		}
 	}
 }
-

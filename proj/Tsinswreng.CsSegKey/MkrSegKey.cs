@@ -23,7 +23,7 @@ public class MkrSegKey{
 	```
 	]
 	""")]
-	public SegKey<obj?> MkNonLeaf(
+	public SegKey<obj?> Mk(
 		ISegKey? Parent
 		,IList<str> Path
 		,obj? Data = null
@@ -36,7 +36,7 @@ public class MkrSegKey{
 		};
 	}
 	
-	public SegKey<T2> MkLeaf<T2>(
+	public SegKey<T2> Mk<T2>(
 		ISegKey? Parent
 		,IList<str> Path
 		,T2 Data = default!
