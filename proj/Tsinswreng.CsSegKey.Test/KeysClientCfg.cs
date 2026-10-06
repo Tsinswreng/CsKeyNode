@@ -4,9 +4,9 @@ using System.Collections;
 
 /// 客戶端配置鍵族。
 /// 繼承 KeyNodeFamily 之後, 裸的 Mk 由基類提供, 本類不必再寫轉發方法。
-public class KeysClientCfg : KeysDeclBase<KeysClientCfg>, IKeyFamily{
+public class KeysClientCfg : KeysDeclBase<KeysClientCfg>, IStaticKeysDecl{
 	/// 本族共用的 Mkr。分隔符之類的配置都寫在它身上, 且必須在鍵聲明之前。
-	public static MkrKeyNode Mkr{get;} = new(){ PathSep = "." };
+	public static MkrKeyNode _MkrKeyNode{get;} = new(){ PathSep = "." };
 
 	// public static KeyNode Mk(){
 		

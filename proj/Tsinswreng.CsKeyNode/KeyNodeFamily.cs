@@ -17,9 +17,9 @@ public class KeysClientCfg : KeyNodeFamily<KeysClientCfg>, IKeyFamily{
 ]
 
 本類不持狀態, 也不知道 {{nameof(MkrKeyNode)}} 有哪些配置字段,
-只把 {{nameof(IKeyFamily.Mkr)}} 拿來用。所以 Mkr 增字段時本類不用改。
+只把 {{nameof(IStaticKeysDecl._MkrKeyNode)}} 拿來用。所以 Mkr 增字段時本類不用改。
 """)]
-public abstract class KeysDeclBase<TSelf> where TSelf : KeysDeclBase<TSelf>, IKeyFamily{
+public abstract class KeysDeclBase<TSelf> where TSelf : KeysDeclBase<TSelf>, IStaticKeysDecl{
 
 	/// 造一個不帶型別信息的節點, 數據型別為 obj?。
 	public static KeyNode<obj?> Mk(
@@ -27,7 +27,7 @@ public abstract class KeysDeclBase<TSelf> where TSelf : KeysDeclBase<TSelf>, IKe
 		,IList<str> Path
 		,obj? Data = null
 	){
-		return TSelf.Mkr.Mk(Parent, Path, Data);
+		return TSelf._MkrKeyNode.Mk(Parent, Path, Data);
 	}
 
 	/// 造一個帶型別信息的節點, 數據型別由調用處推斷。
@@ -36,6 +36,6 @@ public abstract class KeysDeclBase<TSelf> where TSelf : KeysDeclBase<TSelf>, IKe
 		,IList<str> Path
 		,T2 Data = default!
 	){
-		return TSelf.Mkr.Mk(Parent, Path, Data);
+		return TSelf._MkrKeyNode.Mk(Parent, Path, Data);
 	}
 }
