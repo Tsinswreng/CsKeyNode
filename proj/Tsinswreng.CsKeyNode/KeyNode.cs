@@ -54,31 +54,4 @@ public partial class KeyNode<T>:KeyNode,IKeyNode<T>{
 		return base.ToString();
 	}
 
-	
-	[Doc("""
-	#Eg[
-	```cs
-	
-	```
-	]
-	""")]
-	public static KeyNode<obj?> Mk(
-		IKeyNode? Parent
-		,IList<str> Path
-		,obj? Data = null
-	){
-		return new KeyNode<obj?>{
-			RelaPathSegs=Path, Data=Data, Parent=Parent
-		};
-	}
-	
-	public static KeyNode<T2> Mk<T2>(
-		IKeyNode? Parent
-		,IList<str> Path
-		,T2 Data = default!
-	){
-		return new KeyNode<T2>{
-			RelaPathSegs=Path, Data=Data, Parent=Parent
-		};
-	}
 }
