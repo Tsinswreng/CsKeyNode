@@ -1,41 +1,25 @@
 namespace Tsinswreng.CsKeyNode;
 
 [Doc($$"""
-一個鍵族的基類。
-同一族(如一份配置、一組 Url)的鍵共用一個 {{nameof(Mkr)}} 決定分隔符,
-並可用裸的 `Mk` 聲明鍵, 不必每個族自己再寫一遍轉發方法。
+鍵族的 Mk 入口。
+族類繼承本類之後, 類體內就能用裸的 `Mk` 聲明鍵, 不必自己再寫一遍轉發方法。
+裸 `Mk` 不是 using static 導入來的, 而是本類的靜態方法被子類繼承,
+類體內的簡單名查找看得到繼承來的成員。
 
 #Eg[
 ```cs
-public class KeysClientCfg : KeyNodeFamily<KeysClientCfg>{
-	// 本族的分隔符, 只寫這一處
-	protected override str FamilyPathSep => ".";
+public class KeysClientCfg : KeyNodeFamily<KeysClientCfg>, IKeyFamily{
+	// 本族的 Mkr, 由族自己配置; 要寫在鍵聲明之前
+	public static MkrKeyNode Mkr{get;} = new(){ PathSep = "." };
 	public static KeyNode<str> Lang = Mk(null, [nameof(Lang)], "en");
 }
 ```
 ]
 
-用法要點:
-- 裸 `Mk` 不是 using static 導入來的, 而是本基類的靜態方法被子類繼承,
-  類體內的簡單名查找看得到繼承來的成員。
-- `Mk` 讀的是 {{nameof(I)}}(本族的單例)身上的 {{nameof(Mkr)}},
-  所以每個族各有自己的分隔符, 互不影響。
+本類不持狀態, 也不知道 {{nameof(MkrKeyNode)}} 有哪些配置字段,
+只把 {{nameof(IKeyFamily.Mkr)}} 拿來用。所以 Mkr 增字段時本類不用改。
 """)]
-public abstract class KeyNodeFamily<TSelf> where TSelf : KeyNodeFamily<TSelf>, new(){
-
-	/// 本族的單例。
-	/// 每個族(即每個封閉的 TSelf)各有一份, 記着本族的分隔符。
-	public static TSelf I{get;} = new();
-
-	/// 本族用的路徑分隔符。子類覆寫它, 例如 `"."`。默認是 `/`。
-	protected virtual str FamilyPathSep => "/";
-
-	/// 本族的 Mkr。分隔符在單例建立時寫入, 之後各族互不影響。
-	public MkrKeyNode Mkr{get;}
-
-	protected KeyNodeFamily(){
-		Mkr = new MkrKeyNode{ PathSep = FamilyPathSep };
-	}
+public abstract class KeysDeclBase<TSelf> where TSelf : KeysDeclBase<TSelf>, IKeyFamily{
 
 	/// 造一個不帶型別信息的節點, 數據型別為 obj?。
 	public static KeyNode<obj?> Mk(
@@ -43,7 +27,7 @@ public abstract class KeyNodeFamily<TSelf> where TSelf : KeyNodeFamily<TSelf>, n
 		,IList<str> Path
 		,obj? Data = null
 	){
-		return I.Mkr.Mk(Parent, Path, Data);
+		return TSelf.Mkr.Mk(Parent, Path, Data);
 	}
 
 	/// 造一個帶型別信息的節點, 數據型別由調用處推斷。
@@ -52,6 +36,6 @@ public abstract class KeyNodeFamily<TSelf> where TSelf : KeyNodeFamily<TSelf>, n
 		,IList<str> Path
 		,T2 Data = default!
 	){
-		return I.Mkr.Mk(Parent, Path, Data);
+		return TSelf.Mkr.Mk(Parent, Path, Data);
 	}
 }

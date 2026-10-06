@@ -11,8 +11,8 @@ public static class IKeyNodeExtn{
 	#Eg[
 	```cs
 	var Mkr = new MkrKeyNode();
-	var A = Mkr.MkNonLeaf(null, ["A"]);
-	var XY = Mkr.MkNonLeaf(A, ["X", "Y"]);
+	var A = Mkr.Mk(null, ["A"]);
+	var XY = Mkr.Mk(A, ["X", "Y"]);
 	// XY.GetFullPathSegs() 是 ["A", "X", "Y"]
 	```
 	]
@@ -43,8 +43,8 @@ public static class IKeyNodeExtn{
 	#Eg[
 	```cs
 	var Mkr = new MkrKeyNode();
-	var A = Mkr.MkNonLeaf(null, ["A"]);
-	var B = Mkr.MkNonLeaf(A, ["B"]);
+	var A = Mkr.Mk(null, ["A"]);
+	var B = Mkr.Mk(A, ["B"]);
 	// B.GetFullPath() 是 "A/B"; B.GetFullPath(".") 是 "A.B"
 	```
 	]
