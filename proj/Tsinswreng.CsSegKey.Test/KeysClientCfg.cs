@@ -3,15 +3,15 @@ using System.Collections;
 //TODO 異常處理 勿緣用戶配置ʹ謬而致整程序崩
 
 /// 客戶端配置鍵族。
-/// 繼承 MkrSegKeyFamily 之後, 裸的 Mk 由基類提供, 本類不必再寫轉發方法。
-public class KeysClientCfg : MkrKeyNodeFamily<KeysClientCfg>{
+/// 繼承 KeyNodeFamily 之後, 裸的 Mk 由基類提供, 本類不必再寫轉發方法。
+public class KeysClientCfg : KeyNodeFamily<KeysClientCfg>{
 	/// 本族的分隔符。整族只寫這一處。
 	protected override str FamilyPathSep => ".";
 
-	// public static SegKey Mk(){
+	// public static KeyNode Mk(){
 		
 	// }
-	//public static FnMkSegKey Mk = Mkr.Mk;
+	//public static FnMkKeyNode Mk = Mkr.Mk;
 	
 	public static KeyNode<str> Lang = Mk(null, [nameof(Lang)], "en");
 
@@ -25,7 +25,7 @@ public class KeysClientCfg : MkrKeyNodeFamily<KeysClientCfg>{
 		public static KeyNode<IList<object?>> GalleryDirs = Mk(_R, [nameof(GalleryDirs)], (IList<object?>)[]);
 	}
 	public static KeyNode<str> ServerBaseUrl = Mk(null, [nameof(ServerBaseUrl)], "");
-	//public static ICfgNode Ui = Mk(null, [nameof(Ui)], null);
+	//public static IKeyNode Ui = Mk(null, [nameof(Ui)], null);
 	public static class Ui{
 		public static KeyNode _R = Mk(null, [nameof(Ui)]);
 		public static KeyNode<f64> BaseFontSize = Mk(_R, [nameof(BaseFontSize)], 16.0);

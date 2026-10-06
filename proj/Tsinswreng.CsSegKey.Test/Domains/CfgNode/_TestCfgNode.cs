@@ -1,12 +1,12 @@
-// 一個 tester 對應一個 testee（此處是 CfgNode/ICfgNode 及 ExtnCfgNode 路徑擴展），放在獨立文件夾。
+// 一個 tester 對應一個 testee（此處是 KeyNode/IKeyNode 及 ExtnKeyNode 路徑擴展），放在獨立文件夾。
 // 主文件以下劃線開頭：只負責組裝各分片的測試用例，不在主文件裏寫測試。
 using Tsinswreng.CsTreeTest;
 
-namespace Tsinswreng.CsKeyNode.Test.Domains.CfgNode;
+namespace Tsinswreng.CsKeyNode.Test.Domains.KeyNode;
 
-public partial class TestCfgNode : ITester {
-	public TestCfgNode() {
-		// CfgNode 是普通具體類，測試直接 new / 用靜態 Mk，不依賴 DI。
+public partial class TestKeyNode : ITester {
+	public TestKeyNode() {
+		// KeyNode 是普通具體類，測試直接 new / 用靜態 Mk，不依賴 DI。
 	}
 
 	public ITestNode RegisterTestsInto(ITestNode? Node) {

@@ -1,13 +1,13 @@
-// 本分片只測 CfgNode<T>.DfltValue 與 ICfgNode.DfltValueObj 這對雙通道。
+// 本分片只測 KeyNode<T>.DfltValue 與 IKeyNode.DfltValueObj 這對雙通道。
 using Tsinswreng.CsKeyNode;
 using Tsinswreng.CsTreeTest;
 
-namespace Tsinswreng.CsKeyNode.Test.Domains.CfgNode;
+namespace Tsinswreng.CsKeyNode.Test.Domains.KeyNode;
 
-public partial class TestCfgNode {
+public partial class TestKeyNode {
 	public void RegisterDfltValue(ITestNode Node) {
 		var register = Node.MkTestFnRegister(
-			typeof(TestCfgNode),
+			typeof(TestKeyNode),
 			[typeof(KeyNode<int>)],
 			[nameof(KeyNode<int>.Data)],
 			"DfltValue"

@@ -7,27 +7,27 @@ dotnet script Init.csx <NewProjectName>
 
 Init.csx 會一次完成：
 
-- 把 Tsinswreng.CsSegKey 換成 <NewProjectName>（命名空間與專案名，含目錄/檔案/sln）
+- 把 Tsinswreng.CsKeyNode 換成 <NewProjectName>（命名空間與專案名，含目錄/檔案/sln）
 - 刪除模板自帶的 .git
 - 重新 git init
 
 維護腳本
 
-proj/Tsinswreng.CsSegKey.Scripts 是模板附帶的維護腳本項目：
+proj/Tsinswreng.CsKeyNode.Scripts 是模板附帶的維護腳本項目：
 
 - dispatcher：`Program.cs` 依首個引數分派到各命令
 - 上下文：dispatcher 統一建立 `ISCtx`（`RootDir`、`Tfm`）傳給子命令
-- 命令直接跑 `Tsinswreng.CsSegKey.Test` 專案，不依賴專案名
+- 命令直接跑 `Tsinswreng.CsKeyNode.Test` 專案，不依賴專案名
 
 已內建命令
 
-- `Test`：以 `dotnet run` 直接運行 Tsinswreng.CsSegKey.Test（非 AOT 的快速驗證）
-- `TestAotWin`：以 win-x64 NativeAOT 發布 Tsinswreng.CsSegKey.Test 後運行發布物
+- `Test`：以 `dotnet run` 直接運行 Tsinswreng.CsKeyNode.Test（非 AOT 的快速驗證）
+- `TestAotWin`：以 win-x64 NativeAOT 發布 Tsinswreng.CsKeyNode.Test 後運行發布物
 
 用法（在模板根目錄）：
 ```sh
-dotnet run --project proj/Tsinswreng.CsSegKey.Scripts/Tsinswreng.CsSegKey.Scripts.csproj -- Test
-dotnet run --project proj/Tsinswreng.CsSegKey.Scripts/Tsinswreng.CsSegKey.Scripts.csproj -- TestAotWin
+dotnet run --project proj/Tsinswreng.CsKeyNode.Scripts/Tsinswreng.CsKeyNode.Scripts.csproj -- Test
+dotnet run --project proj/Tsinswreng.CsKeyNode.Scripts/Tsinswreng.CsKeyNode.Scripts.csproj -- TestAotWin
 ```
 
 在 Scripts 專案內新增命令時：

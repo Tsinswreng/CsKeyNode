@@ -1,13 +1,13 @@
-// 本分片只測 CfgNode 的靜態工廠 Mk（obj 重載與泛型重載）。
+// 本分片只測 KeyNode 的靜態工廠 Mk（obj 重載與泛型重載）。
 using Tsinswreng.CsKeyNode;
 using Tsinswreng.CsTreeTest;
 
-namespace Tsinswreng.CsKeyNode.Test.Domains.CfgNode;
+namespace Tsinswreng.CsKeyNode.Test.Domains.KeyNode;
 
-public partial class TestCfgNode {
+public partial class TestKeyNode {
 	public void RegisterMk(ITestNode Node) {
 		var register = Node.MkTestFnRegister(
-			typeof(TestCfgNode), // tester type
+			typeof(TestKeyNode), // tester type
 			[typeof(KeyNode<>)], // testee types
 			[nameof(KeyNode<object>.Mk)], // testee fn names, 必須用 nameof()
 			"Mk" // optional
@@ -15,7 +15,7 @@ public partial class TestCfgNode {
 		var R = register.Register;
 		var T = Assert.IsTrue;
 
-		// obj 重載：第三參數傳 null 時 T2 無法推斷，命中 obj 重載，返回 CfgNode<object?>
+		// obj 重載：第三參數傳 null 時 T2 無法推斷，命中 obj 重載，返回 KeyNode<object?>
 		R("obj 重載返回 object 節點", async (o) => {
 			var N = KeyNode<object>.Mk(null, ["A"], null);
 			T(N is KeyNode<object>);

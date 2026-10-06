@@ -10,7 +10,7 @@ public static class IKeyNodeExtn{
 	沿父鏈上溯, 收集全路徑的路徑段, 順序為父先子後。
 	#Eg[
 	```cs
-	var Mkr = new MkrSegKey();
+	var Mkr = new MkrKeyNode();
 	var A = Mkr.MkNonLeaf(null, ["A"]);
 	var XY = Mkr.MkNonLeaf(A, ["X", "Y"]);
 	// XY.GetFullPathSegs() 是 ["A", "X", "Y"]
@@ -42,7 +42,7 @@ public static class IKeyNodeExtn{
 	{nameof(Sep)} 省略時取當前節點的 {nameof(IKeyNode.PathSep)}。
 	#Eg[
 	```cs
-	var Mkr = new MkrSegKey();
+	var Mkr = new MkrKeyNode();
 	var A = Mkr.MkNonLeaf(null, ["A"]);
 	var B = Mkr.MkNonLeaf(A, ["B"]);
 	// B.GetFullPath() 是 "A/B"; B.GetFullPath(".") 是 "A.B"

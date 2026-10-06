@@ -1,6 +1,6 @@
 namespace Tsinswreng.CsKeyNode.Scripts;
 
-/// 以 dotnet run 直接運行 Tsinswreng.CsSegKey.Test 測試專案。
+/// 以 dotnet run 直接運行 Tsinswreng.CsKeyNode.Test 測試專案。
 internal static partial class Test{
 	/// 執行測試；失敗時以非零退出碼結束。
 	internal static partial Task Main(ISCtx Ctx, CT Ct);

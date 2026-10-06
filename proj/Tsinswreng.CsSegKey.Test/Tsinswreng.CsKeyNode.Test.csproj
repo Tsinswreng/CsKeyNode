@@ -6,7 +6,7 @@
 	
 	<ItemGroup>
 		<PackageReference Include="Tsinswreng.CsTreeTest" Version="0.1.1-alpha" />
-		<ProjectReference Include="../Tsinswreng.CsSegKey/Tsinswreng.CsSegKey.csproj" />
+		<ProjectReference Include="../Tsinswreng.CsKeyNode/Tsinswreng.CsKeyNode.csproj" />
 	</ItemGroup>
 
 </Project>

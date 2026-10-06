@@ -27,7 +27,7 @@ public partial class KeyNode: IKeyNode{
 		return z.ToString();
 	}
 
-	/// 非泛型 SegKey 也要能轉成字符串鍵, 故在此重寫 ToString。
+	/// 非泛型 KeyNode 也要能轉成字符串鍵, 故在此重寫 ToString。
 	public override string? ToString(){
 		if(FnToString is not null){
 			return FnToString();

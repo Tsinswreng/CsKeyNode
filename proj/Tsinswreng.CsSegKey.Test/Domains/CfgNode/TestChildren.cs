@@ -1,13 +1,13 @@
-// 本分片只測 CfgNode<T>.Children：默認值與手動掛接（照搬行為：不與 Parent 自動同步）。
+// 本分片只測 KeyNode<T>.Children：默認值與手動掛接（照搬行為：不與 Parent 自動同步）。
 using Tsinswreng.CsKeyNode;
 using Tsinswreng.CsTreeTest;
 
-namespace Tsinswreng.CsKeyNode.Test.Domains.CfgNode;
+namespace Tsinswreng.CsKeyNode.Test.Domains.KeyNode;
 
-public partial class TestCfgNode {
+public partial class TestKeyNode {
 	public void RegisterChildren(ITestNode Node) {
 		var register = Node.MkTestFnRegister(
-			typeof(TestCfgNode),
+			typeof(TestKeyNode),
 			[typeof(KeyNode<object>)],
 			[nameof(KeyNode<object>.Children)],
 			"Children"

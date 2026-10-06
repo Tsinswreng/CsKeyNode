@@ -7,8 +7,8 @@ internal class Program{
 	public static IServiceCollection SvcColct = new ServiceCollection();
 	public static IServiceProvider SvcProvdr = null!;
 	public static async Task Main(string[] args){
-		// CfgNode 測試無需註冊服務：tester 用無參構造，直接 new。
-		var mgr = CsSegKeyTestMgr.Inst;
+		// KeyNode 測試無需註冊服務：tester 用無參構造，直接 new。
+		var mgr = CsKeyNodeTestMgr.Inst;
 		SvcProvdr = mgr.InitSvc(SvcColct, sc => sc.BuildServiceProvider());
 
 		ITestExecutor executor = new TreeTestExecutor();

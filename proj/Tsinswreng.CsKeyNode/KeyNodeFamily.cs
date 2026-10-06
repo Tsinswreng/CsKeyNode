@@ -7,10 +7,10 @@ namespace Tsinswreng.CsKeyNode;
 
 #Eg[
 ```cs
-public class KeysClientCfg : MkrSegKeyFamily<KeysClientCfg>{
+public class KeysClientCfg : KeyNodeFamily<KeysClientCfg>{
 	// 本族的分隔符, 只寫這一處
 	protected override str FamilyPathSep => ".";
-	public static SegKey<str> Lang = Mk(null, [nameof(Lang)], "en");
+	public static KeyNode<str> Lang = Mk(null, [nameof(Lang)], "en");
 }
 ```
 ]
@@ -21,7 +21,7 @@ public class KeysClientCfg : MkrSegKeyFamily<KeysClientCfg>{
 - `Mk` 讀的是 {{nameof(I)}}(本族的單例)身上的 {{nameof(Mkr)}},
   所以每個族各有自己的分隔符, 互不影響。
 """)]
-public abstract class MkrKeyNodeFamily<TSelf> where TSelf : MkrKeyNodeFamily<TSelf>, new(){
+public abstract class KeyNodeFamily<TSelf> where TSelf : KeyNodeFamily<TSelf>, new(){
 
 	/// 本族的單例。
 	/// 每個族(即每個封閉的 TSelf)各有一份, 記着本族的分隔符。
@@ -33,7 +33,7 @@ public abstract class MkrKeyNodeFamily<TSelf> where TSelf : MkrKeyNodeFamily<TSe
 	/// 本族的 Mkr。分隔符在單例建立時寫入, 之後各族互不影響。
 	public MkrKeyNode Mkr{get;}
 
-	protected MkrKeyNodeFamily(){
+	protected KeyNodeFamily(){
 		Mkr = new MkrKeyNode{ PathSep = FamilyPathSep };
 	}
 
