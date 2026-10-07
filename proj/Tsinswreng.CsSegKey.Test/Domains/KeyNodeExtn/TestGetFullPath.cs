@@ -8,7 +8,7 @@ public partial class TestIKeyNodeExtn {
 		var register = Node.MkTestFnRegister(
 			typeof(TestIKeyNodeExtn),
 			[typeof(IKeyNodeExtn)],
-			[nameof(IKeyNodeExtn.GetFullPath)],
+			[nameof(IKeyNodeExtn.BuildFullPath)],
 			"FullPath"
 		);
 		var R = register.Register;
@@ -19,7 +19,7 @@ public partial class TestIKeyNodeExtn {
 			var Mkr = new MkrKeyNode();
 			var A = Mkr.Mk(null, ["A"]);
 			var B = Mkr.Mk(A, ["B"]);
-			T(B.GetFullPath() == "A/B");
+			T(B.BuildFullPath() == "A/B");
 			return null;
 		});
 
@@ -28,7 +28,7 @@ public partial class TestIKeyNodeExtn {
 			var Mkr = new MkrKeyNode();
 			var A = Mkr.Mk(null, ["A"]);
 			var B = Mkr.Mk(A, ["B"]);
-			T(B.GetFullPath(".") == "A.B");
+			T(B.BuildFullPath(".") == "A.B");
 			return null;
 		});
 
@@ -37,14 +37,14 @@ public partial class TestIKeyNodeExtn {
 			var Mkr = new MkrKeyNode{PathSep = "."};
 			var Word = Mkr.Mk(null, ["Word"]);
 			var FilterLanguage = Mkr.Mk(Word, ["FilterLanguage"]);
-			T(FilterLanguage.GetFullPath() == "Word.FilterLanguage");
+			T(FilterLanguage.BuildFullPath() == "Word.FilterLanguage");
 			return null;
 		});
 
 		// 只有空段的節點拼出空串
 		R("空段拼出空串", async (o) => {
 			var Mkr = new MkrKeyNode();
-			T(Mkr.Mk(null, []).GetFullPath() == "");
+			T(Mkr.Mk(null, []).BuildFullPath() == "");
 			return null;
 		});
 
@@ -53,7 +53,7 @@ public partial class TestIKeyNodeExtn {
 			var Mkr = new MkrKeyNode();
 			var Root = Mkr.Mk(null, [""]);
 			var Leaf = Mkr.Mk(Root, ["a"]);
-			T(Leaf.GetFullPath() == "/a");
+			T(Leaf.BuildFullPath() == "/a");
 			return null;
 		});
 
@@ -62,7 +62,7 @@ public partial class TestIKeyNodeExtn {
 			var Mkr = new MkrKeyNode();
 			var A = Mkr.Mk(null, ["A"]);
 			var XY = Mkr.Mk(A, ["X", "Y"]);
-			T(XY.GetFullPath() == "A/X/Y");
+			T(XY.BuildFullPath() == "A/X/Y");
 			return null;
 		});
 
@@ -70,7 +70,7 @@ public partial class TestIKeyNodeExtn {
 		R("不填緩存", async (o) => {
 			var Mkr = new MkrKeyNode();
 			var N = Mkr.Mk(null, ["A"]);
-			T(N.GetFullPath() == "A");
+			T(N.BuildFullPath() == "A");
 			T(N._FullPathCache is null);
 			return null;
 		});

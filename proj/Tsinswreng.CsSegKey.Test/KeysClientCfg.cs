@@ -88,3 +88,20 @@ public class KeysClientCfg : KeysDeclBase<KeysClientCfg>, IStaticKeysDecl{
 		}
 	}
 }
+
+
+public class KeysRedis : KeysDeclBase<KeysClientCfg>, IStaticKeysDecl{
+	public const str S = ":";
+	public static MkrKeyNode _MkrKeyNode{get;} = new(){ PathSep = S };
+	
+	public class User{
+		public static KeyNode _R = Mk(null, [nameof(User)]);
+		public static str History(str IdUser){
+			return _R+S+IdUser;
+		}
+		public static str Friend(str IdUser){
+			return _R+S+IdUser+S+"friend";
+		}
+	}
+	
+}

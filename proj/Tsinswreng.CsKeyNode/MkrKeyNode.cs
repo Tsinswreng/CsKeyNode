@@ -1,5 +1,8 @@
 namespace Tsinswreng.CsKeyNode;
 
+public interface IOptKeyNode{
+	
+}
 
 public class MkrKeyNode{
 	public str PathSep{get;set;} = "/";

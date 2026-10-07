@@ -8,7 +8,7 @@ public partial class TestIKeyNodeExtn {
 		var register = Node.MkTestFnRegister(
 			typeof(TestIKeyNodeExtn), // tester type
 			[typeof(IKeyNodeExtn)], // testee types
-			[nameof(IKeyNodeExtn.GetFullPathSegs)], // testee fn names, 必須用 nameof()
+			[nameof(IKeyNodeExtn.BuildFullPathSegs)], // testee fn names, 必須用 nameof()
 			"FullPathSegs" // optional
 		);
 		var R = register.Register;
@@ -19,7 +19,7 @@ public partial class TestIKeyNodeExtn {
 		// 單節點：全路徑段就是自己那一段
 		R("單節點返回自身段", async (o) => {
 			var N = Mkr.Mk(null, ["Lang"]);
-			T(N.GetFullPathSegs().SequenceEqual(["Lang"]));
+			T(N.BuildFullPathSegs().SequenceEqual(["Lang"]));
 			return null;
 		});
 
@@ -28,7 +28,7 @@ public partial class TestIKeyNodeExtn {
 			var A = Mkr.Mk(null, ["A"]);
 			var B = Mkr.Mk(A, ["B"]);
 			var C = Mkr.Mk(B, ["C"]);
-			T(C.GetFullPathSegs().SequenceEqual(["A", "B", "C"]));
+			T(C.BuildFullPathSegs().SequenceEqual(["A", "B", "C"]));
 			return null;
 		});
 
@@ -36,14 +36,14 @@ public partial class TestIKeyNodeExtn {
 		R("多段節點展平", async (o) => {
 			var A = Mkr.Mk(null, ["A"]);
 			var XY = Mkr.Mk(A, ["X", "Y"]);
-			T(XY.GetFullPathSegs().SequenceEqual(["A", "X", "Y"]));
+			T(XY.BuildFullPathSegs().SequenceEqual(["A", "X", "Y"]));
 			return null;
 		});
 
 		// 根節點的空段列表不貢獻任何段
 		R("空段列表不貢獻段", async (o) => {
 			var N = Mkr.Mk(null, []);
-			T(N.GetFullPathSegs().Count == 0);
+			T(N.BuildFullPathSegs().Count == 0);
 			return null;
 		});
 
@@ -51,15 +51,15 @@ public partial class TestIKeyNodeExtn {
 		R("葉子空段仍保留父層", async (o) => {
 			var A = Mkr.Mk(null, ["A"]);
 			var Leaf = Mkr.Mk(A, []);
-			T(Leaf.GetFullPathSegs().SequenceEqual(["A"]));
+			T(Leaf.BuildFullPathSegs().SequenceEqual(["A"]));
 			return null;
 		});
 
 		// 返回的是新列表：改動它不影響節點本身
 		R("返回新列表", async (o) => {
 			var A = Mkr.Mk(null, ["A"]);
-			A.GetFullPathSegs().Add("Z");
-			T(A.GetFullPathSegs().Count == 1);
+			A.BuildFullPathSegs().Add("Z");
+			T(A.BuildFullPathSegs().Count == 1);
 			return null;
 		});
 
@@ -67,7 +67,7 @@ public partial class TestIKeyNodeExtn {
 		R("上溯不回寫 Children", async (o) => {
 			var A = Mkr.Mk(null, ["A"]);
 			var B = Mkr.Mk(A, ["B"]);
-			T(B.GetFullPathSegs().SequenceEqual(["A", "B"]));
+			T(B.BuildFullPathSegs().SequenceEqual(["A", "B"]));
 			T(A.Children is null);
 			return null;
 		});

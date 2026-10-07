@@ -5,6 +5,14 @@ namespace Tsinswreng.CsKeyNode;
 沒有多態與重寫需求, 故放擴展而非成員。
 ")]
 public static class IKeyNodeExtn{
+	
+	extension(IKeyNode z){
+		public str FullPath{
+			get{
+				return z.ToString()!;
+			}
+		}
+	}
 
 	[Doc($"""
 	沿父鏈上溯, 收集全路徑的路徑段, 順序為父先子後。
@@ -17,7 +25,7 @@ public static class IKeyNodeExtn{
 	```
 	]
 	""")]
-	public static IList<str> GetFullPathSegs(
+	public static IList<str> BuildFullPathSegs(
 		this IKeyNode z
 	){
 		// step 1: 自當前節點沿 Parent 逐層上溯, 收集每層自己的相對路徑段
@@ -49,10 +57,10 @@ public static class IKeyNodeExtn{
 	```
 	]
 	""")]
-	public static str GetFullPath(
+	public static str BuildFullPath(
 		this IKeyNode z
 		,str? Sep = null
 	){
-		return str.Join(Sep ?? z.PathSep, z.GetFullPathSegs());
+		return str.Join(Sep ?? z.PathSep, z.BuildFullPathSegs());
 	}
 }

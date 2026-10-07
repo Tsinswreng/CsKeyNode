@@ -18,7 +18,7 @@ public partial class KeyNode: IKeyNode{
 				return _FullPathCache;
 			}
 			// 全路徑要沿 Parent 上溯, 不能只 Join 自己這一段
-			_FullPathCache = this.GetFullPath();
+			_FullPathCache = this.BuildFullPath();
 			return _FullPathCache;
 		};
 	}

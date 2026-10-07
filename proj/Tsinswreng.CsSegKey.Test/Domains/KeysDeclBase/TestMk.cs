@@ -17,14 +17,14 @@ public partial class TestKeysDeclBase {
 		// 裸 Mk 造出的節點，分隔符來自本族的 Mkr，而不是庫的默認值
 		R("裸 Mk 用本族分隔符", async (o) => {
 			T(KeysTestDot.Word.Name.PathSep == ".");
-			T(KeysTestDot.Word.Name.GetFullPath() == "Word.Name");
+			T(KeysTestDot.Word.Name.BuildFullPath() == "Word.Name");
 			return null;
 		});
 
 		// 另一族的鍵不受族一影響：同一段聲明寫法，拼出的鍵不同
 		R("另一族各記各的分隔符", async (o) => {
 			T(KeysTestSlash.Word.Name.PathSep == "/");
-			T(KeysTestSlash.Word.Name.GetFullPath() == "Word/Name");
+			T(KeysTestSlash.Word.Name.BuildFullPath() == "Word/Name");
 			return null;
 		});
 
@@ -52,7 +52,7 @@ public partial class TestKeysDeclBase {
 		// 同族的鍵可以串成父鏈：父節點是本族另一個鍵聲明
 		R("父子鍵串成路徑", async (o) => {
 			T(KeysTestDot.Word.Name.Parent == KeysTestDot.Word._R);
-			T(KeysTestDot.Word.Name.GetFullPathSegs().SequenceEqual(["Word", "Name"]));
+			T(KeysTestDot.Word.Name.BuildFullPathSegs().SequenceEqual(["Word", "Name"]));
 			return null;
 		});
 	}

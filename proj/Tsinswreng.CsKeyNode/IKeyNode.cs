@@ -20,6 +20,7 @@ public partial interface IKeyNode{
 	default is `/`, NOT `.`
 	Eg[`Foo/Bar/Baz`]
 	")]
+	//讓每個節點都各自帶一個 PathSep 此設計無恙。
 	public str PathSep{get;init;}
 	public str? _FullPathCache{get;set;}
 	[Doc(@$"父節點。為 null 表示本節點是鍵樹的根; 全路徑由此鏈上溯得到。
