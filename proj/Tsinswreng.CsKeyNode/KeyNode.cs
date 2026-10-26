@@ -6,6 +6,7 @@ public partial class KeyNode: IKeyNode{
 	public IList<str> RelaPathSegs{get;init;} = [];
 	public str PathSep{get;init;} = "/";
 	public str? _FullPathCache{get;set;}
+	public IList<str>? _FullPathSegsCache{get;set;}
 	public obj? DataObj{get;set;}
 
 	public IKeyNode? Parent{get;init;}
@@ -39,8 +40,12 @@ public partial class KeyNode: IKeyNode{
 public partial class KeyNode<T>:KeyNode,IKeyNode<T>{
 	public KeyNode(){}
 	
-	public T? Data{
-		get=>DataObj is null?default:(T?)DataObj;
+	[Doc(@$"本節點攜帶的數據, 型別按鍵宣告的 T 解釋。
+	只做強轉, 不做容錯: 型別不符拋 InvalidCastException,
+	值型別且 {nameof(DataObj)} 為 null 時拋 NullReferenceException, 兩者皆屬鍵的宣告違約。
+	")]
+	public T Data{
+		get=>(T)DataObj!;
 		set=>DataObj = value;
 	}
 

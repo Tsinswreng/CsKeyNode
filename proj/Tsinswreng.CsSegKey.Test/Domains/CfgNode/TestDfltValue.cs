@@ -15,10 +15,16 @@ public partial class TestKeyNode {
 		var R = register.Register;
 		var T = Assert.IsTrue;
 
-		// DfltValueObj 為 null 時，DfltValue 返回 default（值類型為 0）
-		R("null 時返回 default", (FnTest)(async (o) => {
+		// Data 只做強轉：值型別且 DataObj 為 null 時直接拋，不再回 default
+		R("值型別取空值時拋", (FnTest)(async (o) => {
 			var N = new KeyNode<int>();
-			T(N.Data == 0);
+			var Thrown = false;
+			try{
+				_ = N.Data;
+			}catch(NullReferenceException){
+				Thrown = true;
+			}
+			T(Thrown);
 			return null;
 		}));
 

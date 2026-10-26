@@ -23,6 +23,11 @@ public partial interface IKeyNode{
 	//讓每個節點都各自帶一個 PathSep 此設計無恙。
 	public str PathSep{get;init;}
 	public str? _FullPathCache{get;set;}
+	[Doc(@$"全路徑段的緩存。
+	首次取 `IKeyNodeExtn` 的 `FullPathSegs` 時填充, 之後直接回傳同一份列表。
+	與 {nameof(_FullPathCache)} 同構: 路徑段與分隔符都是 init-only, 緩存不會失效。
+	")]
+	public IList<str>? _FullPathSegsCache{get;set;}
 	[Doc(@$"父節點。為 null 表示本節點是鍵樹的根; 全路徑由此鏈上溯得到。
 	")]
 	public IKeyNode? Parent{get;init;}
