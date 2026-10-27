@@ -55,11 +55,10 @@ public partial class TestIKeyNodeExtn {
 			return null;
 		});
 
-		// 返回的是新列表：改動它不影響節點本身
-		R("返回新列表", async (o) => {
+		// 每次調用都重新推導，回傳新實例，不共享內部狀態
+		R("每次都是新實例", async (o) => {
 			var A = Mkr.Mk(null, ["A"]);
-			A.BuildFullPathSegs().Add("Z");
-			T(A.BuildFullPathSegs().Count == 1);
+			T(!object.ReferenceEquals(A.BuildFullPathSegs(), A.BuildFullPathSegs()));
 			return null;
 		});
 

@@ -3,10 +3,10 @@ using Tsinswreng.CsCore;
 namespace Tsinswreng.CsKeyNode;
 
 public partial class KeyNode: IKeyNode{
-	public IList<str> RelaPathSegs{get;init;} = [];
+	public IReadOnlyList<str> RelaPathSegs{get;init;} = [];
 	public str PathSep{get;init;} = "/";
 	public str? _FullPathCache{get;set;}
-	public IList<str>? _FullPathSegsCache{get;set;}
+	public IReadOnlyList<str>? _FullPathSegsCache{get;set;}
 	public obj? DataObj{get;set;}
 
 	public IKeyNode? Parent{get;init;}

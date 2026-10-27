@@ -13,8 +13,9 @@ public partial interface IKeyNode{
 	
 	[Doc(@$"Relative Path Segments.
 	without path of `{nameof(Parent)}`
+	只讀: 路徑段是鍵的身份, 建立後不得修改, 否則 {nameof(_FullPathCache)} 與 {nameof(_FullPathSegsCache)} 會失真。
 	")]
-	public IList<str> RelaPathSegs{get;init;}
+	public IReadOnlyList<str> RelaPathSegs{get;init;}
 	
 	[Doc(@$"Path Separator.
 	default is `/`, NOT `.`
@@ -27,7 +28,7 @@ public partial interface IKeyNode{
 	首次取 `IKeyNodeExtn` 的 `FullPathSegs` 時填充, 之後直接回傳同一份列表。
 	與 {nameof(_FullPathCache)} 同構: 路徑段與分隔符都是 init-only, 緩存不會失效。
 	")]
-	public IList<str>? _FullPathSegsCache{get;set;}
+	public IReadOnlyList<str>? _FullPathSegsCache{get;set;}
 	[Doc(@$"父節點。為 null 表示本節點是鍵樹的根; 全路徑由此鏈上溯得到。
 	")]
 	public IKeyNode? Parent{get;init;}

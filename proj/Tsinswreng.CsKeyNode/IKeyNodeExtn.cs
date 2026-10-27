@@ -26,10 +26,10 @@ public static class IKeyNodeExtn{
 
 		[Doc(@$"全路徑的段, 順序為父先子後, 走緩存。
 		首次取用時計算並存入 {nameof(IKeyNode._FullPathSegsCache)}, 之後回傳同一份列表。
-		回傳的是緩存本體, 調用方不得就地修改; 要改請自己複製一份。
+		回傳的是緩存本體, 型別為只讀, 調用方改不了。
 		與 {nameof(BuildFullPathSegs)} 的差別只在緩存: 後者每次都重新推導。
 		")]
-		public IList<str> FullPathSegs{
+		public IReadOnlyList<str> FullPathSegs{
 			get{
 				return z._FullPathSegsCache ??= z.BuildFullPathSegs();
 			}
@@ -43,15 +43,15 @@ public static class IKeyNodeExtn{
 	var Mkr = new MkrKeyNode();
 	var A = Mkr.Mk(null, ["A"]);
 	var XY = Mkr.Mk(A, ["X", "Y"]);
-	// XY.GetFullPathSegs() 是 ["A", "X", "Y"]
+	// XY.BuildFullPathSegs() 是 ["A", "X", "Y"]
 	```
 	]
 	""")]
-	public static IList<str> BuildFullPathSegs(
+	public static IReadOnlyList<str> BuildFullPathSegs(
 		this IKeyNode z
 	){
 		// step 1: 自當前節點沿 Parent 逐層上溯, 收集每層自己的相對路徑段
-		var List2D = new List<IList<str>>();
+		var List2D = new List<IReadOnlyList<str>>();
 		IKeyNode? Cur = z;
 		while(Cur is not null){
 			List2D.Add(Cur.RelaPathSegs);

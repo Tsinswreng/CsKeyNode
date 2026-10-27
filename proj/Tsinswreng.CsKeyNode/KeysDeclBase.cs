@@ -24,7 +24,7 @@ public abstract class KeysDeclBase<TSelf> where TSelf : KeysDeclBase<TSelf>, ISt
 	/// 造一個不帶型別信息的節點, 數據型別為 obj?。
 	public static KeyNode<obj?> Mk(
 		IKeyNode? Parent
-		,IList<str> Path
+		,IReadOnlyList<str> Path
 		,obj? Data = null
 	){
 		return TSelf._MkrKeyNode.Mk(Parent, Path, Data);
@@ -33,7 +33,7 @@ public abstract class KeysDeclBase<TSelf> where TSelf : KeysDeclBase<TSelf>, ISt
 	/// 造一個帶型別信息的節點, 數據型別由調用處推斷。
 	public static KeyNode<T2> Mk<T2>(
 		IKeyNode? Parent
-		,IList<str> Path
+		,IReadOnlyList<str> Path
 		,T2 Data = default!
 	){
 		return TSelf._MkrKeyNode.Mk(Parent, Path, Data);

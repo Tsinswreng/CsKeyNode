@@ -17,7 +17,7 @@ public class MkrKeyNode{
 	""")]
 	public KeyNode<obj?> Mk(
 		IKeyNode? Parent
-		,IList<str> Path
+		,IReadOnlyList<str> Path
 		,obj? Data = null
 	){
 		return new KeyNode<obj?>{
@@ -30,7 +30,7 @@ public class MkrKeyNode{
 	
 	public KeyNode<T2> Mk<T2>(
 		IKeyNode? Parent
-		,IList<str> Path
+		,IReadOnlyList<str> Path
 		,T2 Data = default!
 	){
 		return new KeyNode<T2>{
